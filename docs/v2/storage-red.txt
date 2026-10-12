@@ -1,0 +1,95 @@
+TAP version 13
+# Subtest: storage: read-only document must not write a checkpoint
+not ok 1 - storage: read-only document must not write a checkpoint
+  ---
+  duration_ms: 4.880516
+  type: 'test'
+  location: '/mnt/data/velora_v2_work/tests/storage-v2.test.mjs:4:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/velora_v2_work/tests/storage-v2.test.mjs:4:116)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: storage: read-only document must not save or clear
+not ok 2 - storage: read-only document must not save or clear
+  ---
+  duration_ms: 1.497117
+  type: 'test'
+  location: '/mnt/data/velora_v2_work/tests/storage-v2.test.mjs:5:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///mnt/data/velora_v2_work/tests/storage-v2.test.mjs:5:105)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: storage: writes use monotonically increasing revisions
+not ok 3 - storage: writes use monotonically increasing revisions
+  ---
+  duration_ms: 13.42979
+  type: 'test'
+  location: '/mnt/data/velora_v2_work/tests/storage-v2.test.mjs:6:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(d.updated>old)
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/velora_v2_work/tests/storage-v2.test.mjs:6:167)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: storage: compact fallback is labelled and does not claim full traces
+not ok 4 - storage: compact fallback is labelled and does not claim full traces
+  ---
+  duration_ms: 1.438841
+  type: 'test'
+  location: '/mnt/data/velora_v2_work/tests/storage-v2.test.mjs:7:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/velora_v2_work/tests/storage-v2.test.mjs:7:185)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 0
+# fail 4
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 97.131953

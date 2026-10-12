@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
+const core=fs.readFileSync('src/core.mjs','utf8').replace(/\bexport\s+/g,'');
+function vault(){const map=new Map(),ls={getItem:k=>map.get(k)||null,setItem:(k,v)=>map.set(k,v),removeItem:k=>map.delete(k)};const box={structuredClone,URL,location:{href:'https://test/velora/'},localStorage:ls,navigator:{},indexedDB:{open(){throw Error('fixture: unavailable')}},setTimeout,clearTimeout,console};vm.createContext(box);vm.runInContext(core+'\n'+fs.readFileSync('src/storage.js','utf8')+'\nthis.vault=new LocalVault();this.data=initialData();',box);return {v:box.vault,d:box.data,box,map};}
+test('storage: read-only document must not write a checkpoint',()=>{const {v,d,map}=vault();v.readOnly=true;assert.equal(v.checkpoint(d),false);assert.equal(map.size,0);});
+test('storage: read-only document must not save or clear',async()=>{const {v,d}=vault();v.readOnly=true;await assert.rejects(()=>v.save(d));await assert.rejects(()=>v.clear());});
+test('storage: writes use monotonically increasing revisions',async()=>{const {v,d}=vault();await v.init();await v.save(d);const old=d.updated;await v.save(d);assert.ok(d.updated>old);});
+test('storage: compact fallback is labelled and does not claim full traces',async()=>{const {v,d,map}=vault();await v.init();await v.save(d);const cp=JSON.parse(map.get(v.key));assert.equal(cp._compact,true);assert.equal(v.mode,'CHECKPOINT');});

@@ -1,0 +1,170 @@
+
+> velora-gt@1.0.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: the actual emitted HTML has executable JavaScript (dollar signs preserved)
+ok 1 - the actual emitted HTML has executable JavaScript (dollar signs preserved)
+  ---
+  duration_ms: 4.56173
+  type: 'test'
+  ...
+# Subtest: standalone has no external mandatory scripts styles or fonts
+ok 2 - standalone has no external mandatory scripts styles or fonts
+  ---
+  duration_ms: 0.979744
+  type: 'test'
+  ...
+# Subtest: haversine: identical, one degree and antimeridian
+ok 3 - haversine: identical, one degree and antimeridian
+  ---
+  duration_ms: 1.480424
+  type: 'test'
+  ...
+# Subtest: bearing north and east, wrapping
+ok 4 - bearing north and east, wrapping
+  ---
+  duration_ms: 0.382737
+  type: 'test'
+  ...
+# Subtest: new model does not pretend it knows speed
+ok 5 - new model does not pretend it knows speed
+  ---
+  duration_ms: 0.225915
+  type: 'test'
+  ...
+# Subtest: stationary native fixes do not add GPS jitter
+ok 6 - stationary native fixes do not add GPS jitter
+  ---
+  duration_ms: 1.305874
+  type: 'test'
+  ...
+# Subtest: stationary unknown speed stays within accuracy deadband
+ok 7 - stationary unknown speed stays within accuracy deadband
+  ---
+  duration_ms: 0.504233
+  type: 'test'
+  ...
+# Subtest: valid movement adds distance and converts speed
+ok 8 - valid movement adds distance and converts speed
+  ---
+  duration_ms: 0.26882
+  type: 'test'
+  ...
+# Subtest: fallback accumulates past the uncertainty anchor
+ok 9 - fallback accumulates past the uncertainty anchor
+  ---
+  duration_ms: 0.423308
+  type: 'test'
+  ...
+# Subtest: rejected poor accuracy does not add odometer
+ok 10 - rejected poor accuracy does not add odometer
+  ---
+  duration_ms: 0.260682
+  type: 'test'
+  ...
+# Subtest: teleport jump rejected then resumes from new anchor
+ok 11 - teleport jump rejected then resumes from new anchor
+  ---
+  duration_ms: 0.97836
+  type: 'test'
+  ...
+# Subtest: long gaps do not invent a connecting segment
+ok 12 - long gaps do not invent a connecting segment
+  ---
+  duration_ms: 0.799891
+  type: 'test'
+  ...
+# Subtest: out of order data rejected without changing totals
+ok 13 - out of order data rejected without changing totals
+  ---
+  duration_ms: 0.663761
+  type: 'test'
+  ...
+# Subtest: out of range coordinates and NaN rejected
+ok 14 - out of range coordinates and NaN rejected
+  ---
+  duration_ms: 0.194207
+  type: 'test'
+  ...
+# Subtest: stale is unknown, not stationary, and splits next route segment
+ok 15 - stale is unknown, not stationary, and splits next route segment
+  ---
+  duration_ms: 0.294352
+  type: 'test'
+  ...
+# Subtest: YouTube IDs and canonical URLs parsed safely
+ok 16 - YouTube IDs and canonical URLs parsed safely
+  ---
+  duration_ms: 0.554447
+  type: 'test'
+  ...
+# Subtest: Spotify track, playlist and locale prefixes accepted
+ok 17 - Spotify track, playlist and locale prefixes accepted
+  ---
+  duration_ms: 1.849125
+  type: 'test'
+  ...
+# Subtest: backup validation, version and finite distances
+ok 18 - backup validation, version and finite distances
+  ---
+  duration_ms: 0.626872
+  type: 'test'
+  ...
+# Subtest: backup cannot inject invalid coordinates or giant histories
+ok 19 - backup cannot inject invalid coordinates or giant histories
+  ---
+  duration_ms: 0.296209
+  type: 'test'
+  ...
+# Subtest: GPX preserves interrupted segment boundaries
+ok 20 - GPX preserves interrupted segment boundaries
+  ---
+  duration_ms: 0.65871
+  type: 'test'
+  ...
+# Subtest: invalid or stale fixes withdraw precision, altitude and heading
+ok 21 - invalid or stale fixes withdraw precision, altitude and heading
+  ---
+  duration_ms: 0.247603
+  type: 'test'
+  ...
+# Subtest: service worker: install precaches only local shell
+ok 22 - service worker: install precaches only local shell
+  ---
+  duration_ms: 2.380204
+  type: 'test'
+  ...
+# Subtest: service worker: activate deletes only this app scope
+ok 23 - service worker: activate deletes only this app scope
+  ---
+  duration_ms: 3.817142
+  type: 'test'
+  ...
+# Subtest: service worker: external providers, other apps and POST are not intercepted
+ok 24 - service worker: external providers, other apps and POST are not intercepted
+  ---
+  duration_ms: 1.913956
+  type: 'test'
+  ...
+# Subtest: service worker: app navigation falls back to offline shell
+ok 25 - service worker: app navigation falls back to offline shell
+  ---
+  duration_ms: 33.274733
+  type: 'test'
+  ...
+# Subtest: service worker: navigating documentation cannot poison cached app shell
+ok 26 - service worker: navigating documentation cannot poison cached app shell
+  ---
+  duration_ms: 1.183213
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 153.189456

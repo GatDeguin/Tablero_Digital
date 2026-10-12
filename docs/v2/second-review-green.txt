@@ -1,0 +1,118 @@
+TAP version 13
+# Subtest: v2 monotonic samples remain monotonic after stale
+ok 1 - v2 monotonic samples remain monotonic after stale
+  ---
+  duration_ms: 1.534386
+  type: 'test'
+  ...
+# Subtest: v2 invalid native speed is rejected, not silently converted to fallback
+ok 2 - v2 invalid native speed is rejected, not silently converted to fallback
+  ---
+  duration_ms: 0.535262
+  type: 'test'
+  ...
+# Subtest: v2 negative altitude accuracy does not imply reliable altitude
+ok 3 - v2 negative altitude accuracy does not imply reliable altitude
+  ---
+  duration_ms: 0.173655
+  type: 'test'
+  ...
+# Subtest: v2 native move-start interval contributes measured displacement
+ok 4 - v2 native move-start interval contributes measured displacement
+  ---
+  duration_ms: 0.56333
+  type: 'test'
+  ...
+# Subtest: v2 rejected fix cannot remain usable as parking position
+ok 5 - v2 rejected fix cannot remain usable as parking position
+  ---
+  duration_ms: 0.228196
+  type: 'test'
+  ...
+# Subtest: v2 backups reject invalid trip date
+ok 6 - v2 backups reject invalid trip date
+  ---
+  duration_ms: 0.604386
+  type: 'test'
+  ...
+# Subtest: v2 backups reject reversed dates
+ok 7 - v2 backups reject reversed dates
+  ---
+  duration_ms: 0.21498
+  type: 'test'
+  ...
+# Subtest: v2 backups reject nonchronological route points
+ok 8 - v2 backups reject nonchronological route points
+  ---
+  duration_ms: 0.2478
+  type: 'test'
+  ...
+# Subtest: v2 backups reject impossible stored speed
+ok 9 - v2 backups reject impossible stored speed
+  ---
+  duration_ms: 0.470627
+  type: 'test'
+  ...
+# Subtest: v2 preserves persistent safety latch and trip identity
+ok 10 - v2 preserves persistent safety latch and trip identity
+  ---
+  duration_ms: 0.471669
+  type: 'test'
+  ...
+# Subtest: v2 checkpoint recovery keeps complete historical trace
+ok 11 - v2 checkpoint recovery keeps complete historical trace
+  ---
+  duration_ms: 0.581106
+  type: 'test'
+  ...
+# Subtest: v2 checkpoint newer totals win but missing overlap becomes a break
+ok 12 - v2 checkpoint newer totals win but missing overlap becomes a break
+  ---
+  duration_ms: 0.312025
+  type: 'test'
+  ...
+# Subtest: v2 checkpoint cannot resurrect deleted history
+ok 13 - v2 checkpoint cannot resurrect deleted history
+  ---
+  duration_ms: 0.143926
+  type: 'test'
+  ...
+# Subtest: v2 safety requires elapsed stationary time, not event count
+ok 14 - v2 safety requires elapsed stationary time, not event count
+  ---
+  duration_ms: 0.410122
+  type: 'test'
+  ...
+# Subtest: v2 safety imprecise/interrupted stationary samples cannot unlock
+ok 15 - v2 safety imprecise/interrupted stationary samples cannot unlock
+  ---
+  duration_ms: 0.143053
+  type: 'test'
+  ...
+# Subtest: v2 media URLs disallow credentials and nonstandard ports
+ok 16 - v2 media URLs disallow credentials and nonstandard ports
+  ---
+  duration_ms: 0.232728
+  type: 'test'
+  ...
+# Subtest: v2 overlapping checkpoint tail does not manufacture a signal gap
+ok 17 - v2 overlapping checkpoint tail does not manufacture a signal gap
+  ---
+  duration_ms: 0.213185
+  type: 'test'
+  ...
+# Subtest: v2 accepted fast but imprecise speed locks rather than ignoring movement
+ok 18 - v2 accepted fast but imprecise speed locks rather than ignoring movement
+  ---
+  duration_ms: 0.279218
+  type: 'test'
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 134.981247

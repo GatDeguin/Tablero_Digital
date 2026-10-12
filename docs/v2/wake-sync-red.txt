@@ -1,0 +1,48 @@
+TAP version 13
+# Subtest: wake: disabling during a pending grant releases the late sentinel
+ok 1 - wake: disabling during a pending grant releases the late sentinel
+  ---
+  duration_ms: 2.539163
+  type: 'test'
+  ...
+# Subtest: wake: simultaneous refreshes share one request
+ok 2 - wake: simultaneous refreshes share one request
+  ---
+  duration_ms: 1.853181
+  type: 'test'
+  ...
+# Subtest: wake: rejection does not claim screen is held
+ok 3 - wake: rejection does not claim screen is held
+  ---
+  duration_ms: 0.808817
+  type: 'test'
+  ...
+# Subtest: wake: synchronous rejection also clears the pending request
+not ok 4 - wake: synchronous rejection also clears the pending request
+  ---
+  duration_ms: 2.515194
+  type: 'test'
+  location: '/mnt/data/velora_v2_work/tests/platform.test.mjs:6:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + Promise {
+    +   [Symbol(async_id_symbol)]: 167,
+    +   [Symbol(trigger_async_id_symbol)]: 26,
+    +   undefined
+    + }
+    - null
+    
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 3
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 80.890642

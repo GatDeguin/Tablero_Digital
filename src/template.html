@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101519"><meta name="description" content="VELORA GT: cockpit 3D GPS, viajes y audio. Tus recorridos, sólo en tu dispositivo.">
+<meta name="color-scheme" content="dark light"><meta name="referrer" content="strict-origin-when-cross-origin">
+<title>VELORA GT — Tu camino. Tu cockpit.</title>
+<!--PWA-->
+<style>/*STYLE*/</style>
+</head>
+<body>
+<svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-gps" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 1v4m0 14v4M1 12h4m14 0h4"/></symbol>
+<symbol id="i-route" viewBox="0 0 24 24"><circle cx="5" cy="19" r="2"/><circle cx="19" cy="5" r="2"/><path d="M5 17v-6a4 4 0 0 1 8 0v2a3 3 0 0 0 6 0V7"/></symbol>
+<symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-3v13M9 9l12-3"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="18" cy="15" rx="3" ry="2"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/><path d="M8 2v6m9 1v6M7 16v6"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v3m0 16v3M1 12h3m16 0h3M4 4l2 2m12 12 2 2M4 20l2-2M18 6l2-2"/></symbol>
+<symbol id="i-full" viewBox="0 0 24 24"><path d="M3 9V3h6m6 0h6v6M3 15v6h6m6 0h6v-6"/></symbol>
+<symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v10M6 5a9 9 0 1 0 12 0"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="m5 5 10 7-10 7ZM19 5v14"/></symbol>
+<symbol id="i-prev" viewBox="0 0 24 24"><path d="m19 5-10 7 10 7ZM5 5v14"/></symbol>
+<symbol id="i-screen" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 2v13m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4m-4 5v2"/></symbol>
+<symbol id="i-volume" viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+</defs></svg>
+<main class="cockpit" id="cockpit" aria-label="Tablero VELORA GT">
+  <i class="screw screw-tl" aria-hidden="true"></i><i class="screw screw-tr" aria-hidden="true"></i><i class="screw screw-bl" aria-hidden="true"></i><i class="screw screw-br" aria-hidden="true"></i>
+  <header class="top-rail">
+    <div class="brand"><span class="brand-emblem" aria-hidden="true">V</span><h1>VELORA<span>GT</span></h1><span class="brand-sub">GRAND TOURING INSTRUMENTS</span></div>
+    <div class="rail-right"><button id="focusGPS" class="focus-gps" data-action="gps">INICIAR GPS</button><div class="compact-tools"><button data-action="focus" aria-label="Alternar modo foco">FOCO</button><button data-view="tools" aria-label="Abrir controles del tablero">MÁS</button></div><span class="mode-plaque" id="modePlaque">GPS · STANDBY</span><span class="clock" id="clock">--:--</span><button class="lamp-button" data-view="diagnostics" title="Diagnóstico del dispositivo" aria-label="Ver diagnóstico GPS"><i id="gpsLamp" class="lamp"></i><span id="gpsState">SIN SEÑAL</span></button></div>
+  </header>
+  <section class="cluster" aria-label="Instrumentos y computadora de viaje">
+    <canvas id="world" aria-hidden="true"></canvas><canvas id="flatWorld" aria-hidden="true" hidden></canvas>
+    <section class="speed-column" aria-label="Velocímetro">
+      <div class="instrument-label"><span class="micro-rule"></span>VELOCIDAD GPS<span class="instrument-code">01 / SPEED</span></div>
+      <div id="speedHost" class="speed-host">
+        <div class="speed-readout"><output id="speedValue" aria-label="Velocidad actual">—</output><span class="speed-unit" id="speedUnit">km/h</span></div>
+        <div class="gauge-signal" id="speedSource">ESPERANDO GPS</div>
+        <div id="overBadge" class="over-badge" hidden>EXCESO · LÍMITE MANUAL</div>
+      </div>
+      <div class="speed-foot"><span id="accuracyValue">PRECISIÓN —</span><span id="sourceValue">DATOS NO DISPONIBLES</span></div>
+      <div class="compact-odometer" aria-label="Odómetro y contadores"><div class="compact-total"><span id="compactMark">ODO GPS</span><strong><output id="compactOdo">0,0</output> <small id="compactUnit">km</small></strong></div><div><span>TRIP A</span><strong id="compactA">0,00</strong></div><div><span>TRIP B</span><strong id="compactB">0,00</strong></div><div class="compact-course"><span>RUMBO</span><strong id="compactHeading">—</strong></div></div>
+    </section>
+    <section class="computer-column" aria-label="Computadora de a bordo">
+      <div class="instrument-label"><span class="micro-rule"></span>COMPUTADORA DE VIAJE<span class="instrument-code">02 / SYSTEM</span></div>
+      <div class="screen-machine">
+        <div class="display-glass">
+          <div class="display-top"><span id="viewTitle">VIAJE ACTUAL</span><span class="display-indicators"><span id="recordIndicator">● EN ESPERA</span><span id="netIndicator">LOCAL</span></span></div>
+          <div id="screenContent" class="screen-content" tabindex="-1"></div>
+          <div class="display-bottom"><span id="screenStatus">PRIVACIDAD LOCAL</span><span id="storageStatus">GUARDADO LOCAL</span></div>
+        </div>
+        <nav class="screen-nav" aria-label="Pantallas del tablero">
+          <button class="nav-key active" data-view="drive" aria-label="Viaje actual" aria-pressed="true"><svg><use href="#i-gps"/></svg><span>VIAJE</span></button>
+          <button class="nav-key" data-view="trips" aria-label="Historial de viajes" aria-pressed="false"><svg><use href="#i-route"/></svg><span>REGISTRO</span></button>
+          <button class="nav-key" data-view="media" aria-label="Música y fuentes" aria-pressed="false"><svg><use href="#i-music"/></svg><span>AUDIO</span></button>
+          <button class="nav-key" data-view="parking" aria-label="Estacionamiento y navegación" aria-pressed="false"><svg><use href="#i-pin"/></svg><span>DESTINO</span></button>
+          <button class="nav-key" data-view="settings" aria-label="Configuración" aria-pressed="false"><svg><use href="#i-settings"/></svg><span>AJUSTES</span></button>
+        </nav>
+      </div>
+    </section>
+    <section class="aux-column" aria-label="Rumbo y cuentakilómetros">
+      <div class="instrument-label"><span class="micro-rule"></span>RUMBO GPS<span class="instrument-code">03 / NAV</span></div>
+      <div id="compassHost" class="compass-host"><div class="heading-readout"><output id="headingValue" aria-label="Rumbo">—</output><small id="headingCardinal">SIN RUMBO</small></div></div>
+      <div class="odometer-machine"><div class="odo-caption"><span>ODÓMETRO GPS</span><span id="odoUnit">km</span></div><output id="odoValue" class="odometer" aria-label="Kilometraje GPS acumulado">000000.0</output><div class="odo-lower"><span>ACUMULADO LOCAL</span><span id="baseBadge">ESTIMADO</span></div></div>
+      <div class="trip-counters"><button data-action="resetA" title="Reiniciar Trip A" aria-label="Reiniciar Trip A"><span>TRIP A</span><strong id="tripAValue">0,00</strong><small class="distance-unit">km</small></button><button data-action="resetB" title="Reiniciar Trip B" aria-label="Reiniciar Trip B"><span>TRIP B</span><strong id="tripBValue">0,00</strong><small class="distance-unit">km</small></button></div>
+    </section>
+  </section>
+  <section class="media-deck" aria-label="Consola de audio y encendido GPS">
+    <div class="ignition-block"><button id="gpsButton" class="ignition" data-action="gps" aria-label="Activar GPS" aria-pressed="false"><svg><use href="#i-power"/></svg><span id="gpsButtonText">INICIAR<br>GPS</span></button><span class="engraved" id="ignitionLabel">GPS / REC</span></div>
+    <div class="audio-module">
+      <div class="album-disc" aria-hidden="true"><span>V</span></div>
+      <div class="audio-info"><div class="audio-source"><span id="audioSource">AUDIO LOCAL</span><button data-view="media" class="source-button">FUENTES <span>↗</span></button></div><div id="trackTitle" class="track-title">Tu música. Tu camino.</div><div class="track-sub" id="trackSub">Cargá archivos o conectá un reproductor.</div><div class="track-progress"><span id="audioTime">0:00</span><input id="seek" type="range" min="0" max="1000" value="0" aria-label="Posición de reproducción" disabled><span id="audioDuration">0:00</span></div></div>
+      <div class="transport"><button data-action="prev" title="Pista anterior" aria-label="Pista anterior"><svg><use href="#i-prev"/></svg></button><button id="playButton" class="play-button" data-action="play" title="Reproducir o pausar audio local" aria-label="Reproducir audio local"><svg><use id="playIcon" href="#i-play"/></svg></button><button data-action="next" title="Pista siguiente" aria-label="Pista siguiente"><svg><use href="#i-next"/></svg></button></div>
+      <div class="volume-control"><svg aria-hidden="true"><use href="#i-volume"/></svg><input id="volume" type="range" min="0" max="1" step="0.01" value="0.7" aria-label="Volumen de audio local"><span id="volumeLabel">70</span></div>
+    </div>
+    <div class="limit-module"><button id="limitButton" class="limit-dial" data-view="settings" aria-label="Configurar aviso de velocidad"><span id="limitValue">80</span></button><span class="engraved">AVISO MANUAL</span></div>
+  </section>
+  <nav class="switch-bank" aria-label="Controles físicos">
+    <button id="demoButton" class="rocker" data-action="demo" aria-pressed="false"><i></i><span>DEMO</span><small>EXPLORAR</small></button>
+    <button class="rocker" data-action="park"><svg><use href="#i-pin"/></svg><span>ESTACIONAR</span><small>GUARDAR GPS</small></button>
+    <button id="focusButton" class="rocker" data-action="focus" aria-pressed="false"><svg><use href="#i-eye"/></svg><span>CONDUCCIÓN</span><small>MODO FOCO</small></button>
+    <button id="wakeButton" class="rocker" data-action="wake" aria-pressed="false"><svg><use href="#i-screen"/></svg><span>PANTALLA</span><small>MANTENER ON</small></button>
+    <button class="rocker" data-action="theme"><svg><use href="#i-sun"/></svg><span>AMBIENTE</span><small>DÍA / NOCHE</small></button>
+    <button class="rocker" data-action="fullscreen"><svg><use href="#i-full"/></svg><span>EXPANDIR</span><small>FULLSCREEN</small></button>
+    <button class="rocker" data-view="help"><span class="help-glyph">i</span><span>MANUAL</span><small>SISTEMA</small></button>
+  </nav>
+  <div class="annunciator"><span id="statusIcon" class="status-square"></span><p id="annunciator" role="status" aria-live="polite">Configurá el tablero con el vehículo detenido. Activá GPS para comenzar.</p><span id="lockBadge" hidden><svg><use href="#i-lock"/></svg> CONDUCCIÓN</span></div>
+  <footer class="bottom-rail"><span>VELORA <b>GT</b> <i>·</i> INSTRUMENTACIÓN COMPLEMENTARIA</span><button class="engine-badge" data-view="diagnostics" id="engineBadge">INICIANDO</button><span>LOCAL FIRST <i>·</i> v2.0 · TOURING</span></footer>
+  <div class="ambient-line" aria-hidden="true"></div>
+</main>
+<input id="audioFiles" type="file" accept="audio/*,.mp3,.m4a,.wav,.ogg,.flac,.aac" multiple hidden>
+<input id="backupFile" type="file" accept="application/json,.json" hidden>
+<audio id="audio" preload="metadata"></audio>
+<noscript><p>Activá JavaScript para utilizar los instrumentos GPS.</p></noscript>
+<script>/*APP*/</script>
+</body></html>

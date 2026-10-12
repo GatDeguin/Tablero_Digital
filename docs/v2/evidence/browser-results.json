@@ -1,0 +1,155 @@
+{
+  "environment": "Chromium headless; set_content; WebGL unavailable. Explicit GPS/clock/checkpoint fixtures; no live GPS, remote media or service-worker verification.",
+  "browser": "144.0.7559.96",
+  "tests": [
+    {
+      "test": "No GPS: velocidad desconocida, no cero ficticio",
+      "status": "pass"
+    },
+    {
+      "test": "Fallback real al no disponer de WebGL",
+      "status": "pass"
+    },
+    {
+      "test": "Demo separada de ODO e historial",
+      "status": "pass"
+    },
+    {
+      "test": "Salir de demo vuelve a datos reales",
+      "status": "pass"
+    },
+    {
+      "test": "GPS bloqueado con mensaje en contexto inseguro",
+      "status": "pass"
+    },
+    {
+      "test": "Navegación por las siete pantallas integradas",
+      "status": "pass"
+    },
+    {
+      "test": "20 ciclos de cambio de vista sin duplicar pantalla",
+      "status": "pass"
+    },
+    {
+      "test": "Cambio de movimiento reducido durante sesión",
+      "status": "pass"
+    },
+    {
+      "test": "Modo foco entra y vuelve a disposición completa",
+      "status": "pass"
+    },
+    {
+      "test": "Adaptador GPS: watchPosition iniciado por acción explícita",
+      "status": "pass"
+    },
+    {
+      "test": "GPS simulado + Worker real: distancia, velocidad y bloqueo",
+      "status": "pass"
+    },
+    {
+      "test": "Ajustes no abren en movimiento",
+      "status": "pass"
+    },
+    {
+      "test": "GPS impreciso no suma kilómetros y retira velocidad",
+      "status": "pass"
+    },
+    {
+      "test": "Desbloqueo tras cinco segundos de detención observada",
+      "status": "pass"
+    },
+    {
+      "test": "Reproductor rechaza URL ejecutable",
+      "status": "pass"
+    },
+    {
+      "test": "YouTube: URL oficial embebida (sin validar reproducción remota)",
+      "status": "pass"
+    },
+    {
+      "test": "Comenzar a moverse desmonta reproductor y vuelve a instrumentos",
+      "status": "pass"
+    },
+    {
+      "test": "Error de GPS conserva bloqueo y muestra velocidad desconocida",
+      "status": "pass"
+    },
+    {
+      "test": "Finalizar GPS libera watch y guarda un viaje",
+      "status": "pass"
+    },
+    {
+      "test": "Unidades mph/mi aplicadas a instrumentación",
+      "status": "pass"
+    },
+    {
+      "test": "Aviso manual rechaza límite fuera de rango",
+      "status": "pass"
+    },
+    {
+      "test": "Base informativa requiere confirmación antes de aplicarse",
+      "status": "pass"
+    },
+    {
+      "test": "Trip A: confirmación de reinicio y deshacer",
+      "status": "pass"
+    },
+    {
+      "test": "Checkpoint de respaldo conserva ODO y base (almacenamiento simulado)",
+      "status": "pass"
+    },
+    {
+      "test": "Cancelar borrado preserva los datos",
+      "status": "pass"
+    },
+    {
+      "test": "Spotify: montaje del embed oficial sin credenciales en el HTML",
+      "status": "pass"
+    },
+    {
+      "test": "Cambiar de vista desmonta el embed de Spotify",
+      "status": "pass"
+    },
+    {
+      "test": "WAV local: selección y metadatos decodificados por Chromium",
+      "status": "pass"
+    },
+    {
+      "test": "Audio local: reproducción avanza y pausa efectivamente",
+      "status": "pass"
+    },
+    {
+      "test": "Volumen local enlazado al elemento de audio",
+      "status": "pass"
+    },
+    {
+      "test": "Búsqueda temporal del audio local",
+      "status": "pass"
+    },
+    {
+      "test": "Importación JSON inválida no altera kilómetros",
+      "status": "pass"
+    },
+    {
+      "test": "Vista desktop 1440×940: sin desborde horizontal",
+      "status": "pass"
+    },
+    {
+      "test": "Vista landscape 844×390: sin desborde horizontal",
+      "status": "pass"
+    },
+    {
+      "test": "Vista portrait 390×844: sin desborde horizontal",
+      "status": "pass"
+    },
+    {
+      "test": "Vista tablet 768×1024: sin desborde horizontal",
+      "status": "pass"
+    },
+    {
+      "test": "Ninguna excepción JavaScript no controlada durante las pruebas",
+      "status": "pass"
+    }
+  ],
+  "pageErrors": []
+}

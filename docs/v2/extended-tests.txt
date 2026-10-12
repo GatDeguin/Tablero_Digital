@@ -1,0 +1,20 @@
+PASS Driving lock is included in persistent data
+PASS Simulated reload preserves driving lock
+PASS Reload does not reopen settings while lock persists
+PASS GPS finalization drains already queued Worker samples
+PASS Explicit parking confirmation clears and saves the latch
+PASS Historical trip inspector renders its recorded points
+PASS Escape cancels trip deletion without mutation
+PASS Confirmed trip deletion preserves ODO
+PASS Reopening AUDIO removes stale external-player state
+PASS Demo theme previews are rolled back on exit
+PASS Unknown initial speed does not manufacture a maximum of zero
+PASS Renderer rests after reduced-motion transition settles
+PASS Contended writer fixture opens read-only and cannot record or checkpoint
+PASS Extended viewport small-portrait 320×568, primary targets ≥44 CSS px and all tools reachable
+PASS Extended viewport small-landscape 640×360, primary targets ≥44 CSS px and all tools reachable
+PASS Extended viewport landscape 844×390, primary targets ≥44 CSS px and all tools reachable
+PASS Extended viewport desktop-hd 1920×1080, primary targets ≥44 CSS px and all tools reachable
+PASS Extended viewport tablet 768×1024, primary targets ≥44 CSS px and all tools reachable
+PASS Landscape focus preserves the physical GPS switch
+PASS No uncaught JS errors in extended workflows

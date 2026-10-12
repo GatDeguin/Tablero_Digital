@@ -1,0 +1,368 @@
+
+> velora-gt@2.0.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: the actual emitted HTML has executable JavaScript (dollar signs preserved)
+ok 1 - the actual emitted HTML has executable JavaScript (dollar signs preserved)
+  ---
+  duration_ms: 7.443674
+  type: 'test'
+  ...
+# Subtest: standalone has no external mandatory scripts styles or fonts
+ok 2 - standalone has no external mandatory scripts styles or fonts
+  ---
+  duration_ms: 1.722869
+  type: 'test'
+  ...
+# Subtest: CSP in each built artifact authorizes exactly its own inline script hash
+ok 3 - CSP in each built artifact authorizes exactly its own inline script hash
+  ---
+  duration_ms: 11.386565
+  type: 'test'
+  ...
+# Subtest: CSP does not grant eval or script unsafe-inline
+ok 4 - CSP does not grant eval or script unsafe-inline
+  ---
+  duration_ms: 1.361565
+  type: 'test'
+  ...
+# Subtest: haversine: identical, one degree and antimeridian
+ok 5 - haversine: identical, one degree and antimeridian
+  ---
+  duration_ms: 2.054583
+  type: 'test'
+  ...
+# Subtest: bearing north and east, wrapping
+ok 6 - bearing north and east, wrapping
+  ---
+  duration_ms: 0.331364
+  type: 'test'
+  ...
+# Subtest: new model does not pretend it knows speed
+ok 7 - new model does not pretend it knows speed
+  ---
+  duration_ms: 0.214845
+  type: 'test'
+  ...
+# Subtest: stationary native fixes do not add GPS jitter
+ok 8 - stationary native fixes do not add GPS jitter
+  ---
+  duration_ms: 1.126958
+  type: 'test'
+  ...
+# Subtest: stationary unknown speed stays within accuracy deadband
+ok 9 - stationary unknown speed stays within accuracy deadband
+  ---
+  duration_ms: 0.501522
+  type: 'test'
+  ...
+# Subtest: valid movement adds distance and converts speed
+ok 10 - valid movement adds distance and converts speed
+  ---
+  duration_ms: 0.251308
+  type: 'test'
+  ...
+# Subtest: fallback accumulates past the uncertainty anchor
+ok 11 - fallback accumulates past the uncertainty anchor
+  ---
+  duration_ms: 0.524399
+  type: 'test'
+  ...
+# Subtest: rejected poor accuracy does not add odometer
+ok 12 - rejected poor accuracy does not add odometer
+  ---
+  duration_ms: 0.255862
+  type: 'test'
+  ...
+# Subtest: teleport jump rejected then resumes from new anchor
+ok 13 - teleport jump rejected then resumes from new anchor
+  ---
+  duration_ms: 0.550654
+  type: 'test'
+  ...
+# Subtest: long gaps do not invent a connecting segment
+ok 14 - long gaps do not invent a connecting segment
+  ---
+  duration_ms: 0.58852
+  type: 'test'
+  ...
+# Subtest: out of order data rejected without changing totals
+ok 15 - out of order data rejected without changing totals
+  ---
+  duration_ms: 0.266641
+  type: 'test'
+  ...
+# Subtest: out of range coordinates and NaN rejected
+ok 16 - out of range coordinates and NaN rejected
+  ---
+  duration_ms: 0.180251
+  type: 'test'
+  ...
+# Subtest: stale is unknown, not stationary, and splits next route segment
+ok 17 - stale is unknown, not stationary, and splits next route segment
+  ---
+  duration_ms: 0.219111
+  type: 'test'
+  ...
+# Subtest: YouTube IDs and canonical URLs parsed safely
+ok 18 - YouTube IDs and canonical URLs parsed safely
+  ---
+  duration_ms: 0.852339
+  type: 'test'
+  ...
+# Subtest: Spotify track, playlist and locale prefixes accepted
+ok 19 - Spotify track, playlist and locale prefixes accepted
+  ---
+  duration_ms: 0.276124
+  type: 'test'
+  ...
+# Subtest: backup validation, version and finite distances
+ok 20 - backup validation, version and finite distances
+  ---
+  duration_ms: 0.686587
+  type: 'test'
+  ...
+# Subtest: backup cannot inject invalid coordinates or giant histories
+ok 21 - backup cannot inject invalid coordinates or giant histories
+  ---
+  duration_ms: 0.275111
+  type: 'test'
+  ...
+# Subtest: GPX preserves interrupted segment boundaries
+ok 22 - GPX preserves interrupted segment boundaries
+  ---
+  duration_ms: 0.658532
+  type: 'test'
+  ...
+# Subtest: invalid or stale fixes withdraw precision, altitude and heading
+ok 23 - invalid or stale fixes withdraw precision, altitude and heading
+  ---
+  duration_ms: 0.266344
+  type: 'test'
+  ...
+# Subtest: wake: disabling during a pending grant releases the late sentinel
+ok 24 - wake: disabling during a pending grant releases the late sentinel
+  ---
+  duration_ms: 2.760232
+  type: 'test'
+  ...
+# Subtest: wake: simultaneous refreshes share one request
+ok 25 - wake: simultaneous refreshes share one request
+  ---
+  duration_ms: 1.114121
+  type: 'test'
+  ...
+# Subtest: wake: rejection does not claim screen is held
+ok 26 - wake: rejection does not claim screen is held
+  ---
+  duration_ms: 1.235916
+  type: 'test'
+  ...
+# Subtest: wake: synchronous rejection also clears the pending request
+ok 27 - wake: synchronous rejection also clears the pending request
+  ---
+  duration_ms: 0.888907
+  type: 'test'
+  ...
+# Subtest: renderer: absent speed and heading withdraw needles instead of measuring zero
+ok 28 - renderer: absent speed and heading withdraw needles instead of measuring zero
+  ---
+  duration_ms: 0.847236
+  type: 'test'
+  ...
+# Subtest: renderer: true zero speed remains a known measurement
+ok 29 - renderer: true zero speed remains a known measurement
+  ---
+  duration_ms: 1.209746
+  type: 'test'
+  ...
+# Subtest: storage: read-only document must not write a checkpoint
+ok 30 - storage: read-only document must not write a checkpoint
+  ---
+  duration_ms: 3.714894
+  type: 'test'
+  ...
+# Subtest: storage: read-only document must not save or clear
+ok 31 - storage: read-only document must not save or clear
+  ---
+  duration_ms: 1.464231
+  type: 'test'
+  ...
+# Subtest: storage: writes use monotonically increasing revisions
+ok 32 - storage: writes use monotonically increasing revisions
+  ---
+  duration_ms: 2.270921
+  type: 'test'
+  ...
+# Subtest: storage: compact fallback is labelled and does not claim full traces
+ok 33 - storage: compact fallback is labelled and does not claim full traces
+  ---
+  duration_ms: 1.086141
+  type: 'test'
+  ...
+# Subtest: service worker: install precaches only local shell
+ok 34 - service worker: install precaches only local shell
+  ---
+  duration_ms: 2.871789
+  type: 'test'
+  ...
+# Subtest: service worker: activate deletes only this app scope
+ok 35 - service worker: activate deletes only this app scope
+  ---
+  duration_ms: 1.866268
+  type: 'test'
+  ...
+# Subtest: service worker: external providers, other apps and POST are not intercepted
+ok 36 - service worker: external providers, other apps and POST are not intercepted
+  ---
+  duration_ms: 0.777631
+  type: 'test'
+  ...
+# Subtest: service worker: app navigation falls back to offline shell
+ok 37 - service worker: app navigation falls back to offline shell
+  ---
+  duration_ms: 39.406032
+  type: 'test'
+  ...
+# Subtest: service worker: navigating documentation cannot poison cached app shell
+ok 38 - service worker: navigating documentation cannot poison cached app shell
+  ---
+  duration_ms: 0.687753
+  type: 'test'
+  ...
+# Subtest: v2 service worker: install does not force skipWaiting
+ok 39 - v2 service worker: install does not force skipWaiting
+  ---
+  duration_ms: 0.171642
+  type: 'test'
+  ...
+# Subtest: v2 service worker: activation requires explicit message
+ok 40 - v2 service worker: activation requires explicit message
+  ---
+  duration_ms: 0.810599
+  type: 'test'
+  ...
+# Subtest: v2 service worker: served navigation is not updated silently from the network
+ok 41 - v2 service worker: served navigation is not updated silently from the network
+  ---
+  duration_ms: 0.10691
+  type: 'test'
+  ...
+# Subtest: v2 monotonic samples remain monotonic after stale
+ok 42 - v2 monotonic samples remain monotonic after stale
+  ---
+  duration_ms: 1.195938
+  type: 'test'
+  ...
+# Subtest: v2 invalid native speed is rejected, not silently converted to fallback
+ok 43 - v2 invalid native speed is rejected, not silently converted to fallback
+  ---
+  duration_ms: 0.347915
+  type: 'test'
+  ...
+# Subtest: v2 negative altitude accuracy does not imply reliable altitude
+ok 44 - v2 negative altitude accuracy does not imply reliable altitude
+  ---
+  duration_ms: 0.197289
+  type: 'test'
+  ...
+# Subtest: v2 native move-start interval contributes measured displacement
+ok 45 - v2 native move-start interval contributes measured displacement
+  ---
+  duration_ms: 0.584424
+  type: 'test'
+  ...
+# Subtest: v2 rejected fix cannot remain usable as parking position
+ok 46 - v2 rejected fix cannot remain usable as parking position
+  ---
+  duration_ms: 0.224906
+  type: 'test'
+  ...
+# Subtest: v2 backups reject invalid trip date
+ok 47 - v2 backups reject invalid trip date
+  ---
+  duration_ms: 0.532884
+  type: 'test'
+  ...
+# Subtest: v2 backups reject reversed dates
+ok 48 - v2 backups reject reversed dates
+  ---
+  duration_ms: 0.258259
+  type: 'test'
+  ...
+# Subtest: v2 backups reject nonchronological route points
+ok 49 - v2 backups reject nonchronological route points
+  ---
+  duration_ms: 0.211126
+  type: 'test'
+  ...
+# Subtest: v2 backups reject impossible stored speed
+ok 50 - v2 backups reject impossible stored speed
+  ---
+  duration_ms: 0.311582
+  type: 'test'
+  ...
+# Subtest: v2 preserves persistent safety latch and trip identity
+ok 51 - v2 preserves persistent safety latch and trip identity
+  ---
+  duration_ms: 0.65177
+  type: 'test'
+  ...
+# Subtest: v2 checkpoint recovery keeps complete historical trace
+ok 52 - v2 checkpoint recovery keeps complete historical trace
+  ---
+  duration_ms: 0.658705
+  type: 'test'
+  ...
+# Subtest: v2 checkpoint newer totals win but missing overlap becomes a break
+ok 53 - v2 checkpoint newer totals win but missing overlap becomes a break
+  ---
+  duration_ms: 0.363942
+  type: 'test'
+  ...
+# Subtest: v2 checkpoint cannot resurrect deleted history
+ok 54 - v2 checkpoint cannot resurrect deleted history
+  ---
+  duration_ms: 0.149154
+  type: 'test'
+  ...
+# Subtest: v2 safety requires elapsed stationary time, not event count
+ok 55 - v2 safety requires elapsed stationary time, not event count
+  ---
+  duration_ms: 0.343571
+  type: 'test'
+  ...
+# Subtest: v2 safety imprecise/interrupted stationary samples cannot unlock
+ok 56 - v2 safety imprecise/interrupted stationary samples cannot unlock
+  ---
+  duration_ms: 0.123304
+  type: 'test'
+  ...
+# Subtest: v2 media URLs disallow credentials and nonstandard ports
+ok 57 - v2 media URLs disallow credentials and nonstandard ports
+  ---
+  duration_ms: 0.273717
+  type: 'test'
+  ...
+# Subtest: v2 overlapping checkpoint tail does not manufacture a signal gap
+ok 58 - v2 overlapping checkpoint tail does not manufacture a signal gap
+  ---
+  duration_ms: 1.110887
+  type: 'test'
+  ...
+# Subtest: v2 accepted fast but imprecise speed locks rather than ignoring movement
+ok 59 - v2 accepted fast but imprecise speed locks rather than ignoring movement
+  ---
+  duration_ms: 0.128202
+  type: 'test'
+  ...
+1..59
+# tests 59
+# suites 0
+# pass 59
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 482.755493

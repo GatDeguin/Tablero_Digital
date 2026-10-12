@@ -1,0 +1,87 @@
+{
+  "environment": "Chromium headless + explicit GPS/clock/checkpoint/locks fixtures; set_content (local HTTP navigation blocked by administrator). Renderer 2D fallback; no physical hardware tests.",
+  "browser": "144.0.7559.96",
+  "tests": [
+    {
+      "test": "Driving lock is included in persistent data",
+      "status": "pass"
+    },
+    {
+      "test": "Simulated reload preserves driving lock",
+      "status": "pass"
+    },
+    {
+      "test": "Reload does not reopen settings while lock persists",
+      "status": "pass"
+    },
+    {
+      "test": "GPS finalization drains already queued Worker samples",
+      "status": "pass"
+    },
+    {
+      "test": "Explicit parking confirmation clears and saves the latch",
+      "status": "pass"
+    },
+    {
+      "test": "Historical trip inspector renders its recorded points",
+      "status": "pass"
+    },
+    {
+      "test": "Escape cancels trip deletion without mutation",
+      "status": "pass"
+    },
+    {
+      "test": "Confirmed trip deletion preserves ODO",
+      "status": "pass"
+    },
+    {
+      "test": "Reopening AUDIO removes stale external-player state",
+      "status": "pass"
+    },
+    {
+      "test": "Demo theme previews are rolled back on exit",
+      "status": "pass"
+    },
+    {
+      "test": "Unknown initial speed does not manufacture a maximum of zero",
+      "status": "pass"
+    },
+    {
+      "test": "Renderer rests after reduced-motion transition settles",
+      "status": "pass"
+    },
+    {
+      "test": "Contended writer fixture opens read-only and cannot record or checkpoint",
+      "status": "pass"
+    },
+    {
+      "test": "Extended viewport small-portrait 320×568, primary targets ≥44 CSS px and all tools reachable",
+      "status": "pass"
+    },
+    {
+      "test": "Extended viewport small-landscape 640×360, primary targets ≥44 CSS px and all tools reachable",
+      "status": "pass"
+    },
+    {
+      "test": "Extended viewport landscape 844×390, primary targets ≥44 CSS px and all tools reachable",
+      "status": "pass"
+    },
+    {
+      "test": "Extended viewport desktop-hd 1920×1080, primary targets ≥44 CSS px and all tools reachable",
+      "status": "pass"
+    },
+    {
+      "test": "Extended viewport tablet 768×1024, primary targets ≥44 CSS px and all tools reachable",
+      "status": "pass"
+    },
+    {
+      "test": "Landscape focus preserves the physical GPS switch",
+      "status": "pass"
+    },
+    {
+      "test": "No uncaught JS errors in extended workflows",
+      "status": "pass"
+    }
+  ],
+  "errors": []
+}

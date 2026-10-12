@@ -1,0 +1,158 @@
+TAP version 13
+# Subtest: v2 monotonic samples remain monotonic after stale
+ok 1 - v2 monotonic samples remain monotonic after stale
+  ---
+  duration_ms: 1.303635
+  type: 'test'
+  ...
+# Subtest: v2 invalid native speed is rejected, not silently converted to fallback
+ok 2 - v2 invalid native speed is rejected, not silently converted to fallback
+  ---
+  duration_ms: 0.275666
+  type: 'test'
+  ...
+# Subtest: v2 negative altitude accuracy does not imply reliable altitude
+ok 3 - v2 negative altitude accuracy does not imply reliable altitude
+  ---
+  duration_ms: 0.326562
+  type: 'test'
+  ...
+# Subtest: v2 native move-start interval contributes measured displacement
+ok 4 - v2 native move-start interval contributes measured displacement
+  ---
+  duration_ms: 0.261382
+  type: 'test'
+  ...
+# Subtest: v2 rejected fix cannot remain usable as parking position
+ok 5 - v2 rejected fix cannot remain usable as parking position
+  ---
+  duration_ms: 0.185977
+  type: 'test'
+  ...
+# Subtest: v2 backups reject invalid trip date
+ok 6 - v2 backups reject invalid trip date
+  ---
+  duration_ms: 1.102896
+  type: 'test'
+  ...
+# Subtest: v2 backups reject reversed dates
+ok 7 - v2 backups reject reversed dates
+  ---
+  duration_ms: 0.252755
+  type: 'test'
+  ...
+# Subtest: v2 backups reject nonchronological route points
+ok 8 - v2 backups reject nonchronological route points
+  ---
+  duration_ms: 0.396811
+  type: 'test'
+  ...
+# Subtest: v2 backups reject impossible stored speed
+ok 9 - v2 backups reject impossible stored speed
+  ---
+  duration_ms: 0.398222
+  type: 'test'
+  ...
+# Subtest: v2 preserves persistent safety latch and trip identity
+ok 10 - v2 preserves persistent safety latch and trip identity
+  ---
+  duration_ms: 0.436501
+  type: 'test'
+  ...
+# Subtest: v2 checkpoint recovery keeps complete historical trace
+ok 11 - v2 checkpoint recovery keeps complete historical trace
+  ---
+  duration_ms: 0.558508
+  type: 'test'
+  ...
+# Subtest: v2 checkpoint newer totals win but missing overlap becomes a break
+ok 12 - v2 checkpoint newer totals win but missing overlap becomes a break
+  ---
+  duration_ms: 0.298167
+  type: 'test'
+  ...
+# Subtest: v2 checkpoint cannot resurrect deleted history
+ok 13 - v2 checkpoint cannot resurrect deleted history
+  ---
+  duration_ms: 0.573073
+  type: 'test'
+  ...
+# Subtest: v2 safety requires elapsed stationary time, not event count
+ok 14 - v2 safety requires elapsed stationary time, not event count
+  ---
+  duration_ms: 0.591031
+  type: 'test'
+  ...
+# Subtest: v2 safety imprecise/interrupted stationary samples cannot unlock
+ok 15 - v2 safety imprecise/interrupted stationary samples cannot unlock
+  ---
+  duration_ms: 0.153051
+  type: 'test'
+  ...
+# Subtest: v2 media URLs disallow credentials and nonstandard ports
+ok 16 - v2 media URLs disallow credentials and nonstandard ports
+  ---
+  duration_ms: 0.235478
+  type: 'test'
+  ...
+# Subtest: v2 overlapping checkpoint tail does not manufacture a signal gap
+not ok 17 - v2 overlapping checkpoint tail does not manufacture a signal gap
+  ---
+  duration_ms: 2.104732
+  type: 'test'
+  location: '/mnt/data/velora_v2_work/tests/v2-regressions.test.mjs:22:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/velora_v2_work/tests/v2-regressions.test.mjs:22:350)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: v2 accepted fast but imprecise speed locks rather than ignoring movement
+not ok 18 - v2 accepted fast but imprecise speed locks rather than ignoring movement
+  ---
+  duration_ms: 0.193195
+  type: 'test'
+  location: '/mnt/data/velora_v2_work/tests/v2-regressions.test.mjs:23:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    false !== true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/velora_v2_work/tests/v2-regressions.test.mjs:23:193)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..18
+# tests 18
+# suites 0
+# pass 16
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 104.456188
