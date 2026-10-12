@@ -1,6 +1,8 @@
 name: VELORA GT - verify and publish
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -64,14 +66,25 @@ jobs:
                   path = pathlib.Path(member.name)
                   path.parent.mkdir(parents=True, exist_ok=True)
                   path.write_bytes(archive.extractfile(member).read())
-          print(f'Restored {len(members)} release files with verified SHA-256.')
+          manifest_path = pathlib.Path('docs/RELEASE_SHA256.json')
+          assert hashlib.sha256(manifest_path.read_bytes()).hexdigest() == '29fd9d213a28e10cf41007301cf7711b8d34f47e019ea7c96f7baaf22a49801b', 'Unexpected release manifest'
+          manifest = json.loads(manifest_path.read_text())
+          checked = 0
+          for name, expected in manifest.items():
+              if name.startswith('docs/v2/evidence/') and name.endswith('.png'):
+                  continue
+              data = pathlib.Path(name).read_bytes()
+              assert len(data) == expected['bytes'], 'Size mismatch: ' + name
+              assert hashlib.sha256(data).hexdigest() == expected['sha256'], 'File checksum mismatch: ' + name
+              checked += 1
+          print(f'Restored {len(members)} release files; {checked} file checksums match the delivered release.')
           pathlib.Path('docs/DEPLOYMENT.md').write_text(
               '# GitHub deployment\n\n'
               'VELORA GT 2.0 from the delivered release. Application, PWA icons, sources, tests, manuals and textual test evidence are included. '
               'Large screenshots from the local verification archive are not stored in this repository. '
               'The original release manifest also lists those screenshots.\n\n'
-              'All imported file bytes were transported with SHA-1 object checks and a SHA-256 archive check. '
-              'GitHub Pages deployment requires Settings > Pages > Source: GitHub Actions.\n', encoding='utf-8')
+              'Imported files were checked against the delivered SHA-256 manifest before committing. '
+              'GitHub Pages requires Settings > Pages > Source: GitHub Actions. After enabling it, run this workflow from the Actions tab.\n', encoding='utf-8')
       - name: Run unit tests
         run: npm test
       - name: Commit imported release without overwriting remote work
@@ -91,6 +104,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    outputs:
+      pages_ready: ${{ steps.pages.outputs.ready }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -103,9 +118,23 @@ jobs:
       - uses: actions/upload-pages-artifact@v4
         with:
           path: _site
+      - name: Check initial Pages activation
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          ready=$(gh api "repos/$REPO" --jq '.has_pages')
+          echo "ready=$ready" >> "$GITHUB_OUTPUT"
+          if [ "$ready" != "true" ]; then
+            echo "::warning::The app is uploaded. Enable Settings > Pages > Source: GitHub Actions, then run this workflow again."
+            echo "## Code uploaded; Pages activation pending" >> "$GITHUB_STEP_SUMMARY"
+            echo "Open https://github.com/$REPO/settings/pages and select GitHub Actions as the source. Then run this workflow again from the Actions tab." >> "$GITHUB_STEP_SUMMARY"
+          fi
 
   deploy:
     needs: build
+    if: needs.build.outputs.pages_ready == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
