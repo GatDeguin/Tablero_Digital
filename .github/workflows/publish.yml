@@ -1,0 +1,121 @@
+name: VELORA GT - verify and publish
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: velora-pages
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      commit: ${{ steps.release.outputs.commit }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Restore the verified release on first upload
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: python
+        run: |
+          import base64, hashlib, io, json, os, pathlib, tarfile, urllib.request
+          if pathlib.Path('index.html').exists():
+              print('Release already present; keeping current repository files.')
+              raise SystemExit(0)
+          parts = [
+              '5e5246dbacc5e7b415955d2f2e0534a14ccbf716',
+              '09a002483100590a2ea7afe71329c67ce1837ee3',
+              '36c930eece770de43058ab6d7857d2fd86915e31',
+              '53984069050973f9835a3110d5fc4582f50c67d1',
+              '8eef703a9d22ea20ad3fb0b856a2b2624e44d5e5',
+              'f537a2c323d1c38209052460e3ab49d489c90323',
+              '19b934f5692dcb843ccef3c1afbde58497d6ba45',
+              '07db89f683c70b5ee38bb7347a5012d91d8133cc',
+              '15e2d6fc528b4abef4298c611b475b7d28541125',
+          ]
+          payload = bytearray()
+          for sha in parts:
+              request = urllib.request.Request(
+                  f'https://api.github.com/repos/{os.environ["REPO"]}/git/blobs/{sha}',
+                  headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'], 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
+              with urllib.request.urlopen(request, timeout=60) as response:
+                  obj = json.load(response)
+              data = base64.b64decode(obj['content'])
+              assert hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest() == sha
+              payload.extend(data)
+          assert hashlib.sha256(payload).hexdigest() == 'dd9f1902ca12fb208176d8eba7b591a42cd7871fcda6c7acaf93bf037ae34cce', 'Release checksum mismatch'
+          with tarfile.open(fileobj=io.BytesIO(payload), mode='r:xz') as archive:
+              members = archive.getmembers()
+              for member in members:
+                  path = pathlib.PurePosixPath(member.name)
+                  assert member.isfile() and not path.is_absolute() and '..' not in path.parts
+                  assert path.parts[0] not in ('.git', '.github')
+              for member in members:
+                  path = pathlib.Path(member.name)
+                  path.parent.mkdir(parents=True, exist_ok=True)
+                  path.write_bytes(archive.extractfile(member).read())
+          print(f'Restored {len(members)} release files with verified SHA-256.')
+          pathlib.Path('docs/DEPLOYMENT.md').write_text(
+              '# GitHub deployment\n\n'
+              'VELORA GT 2.0 from the delivered release. Application, PWA icons, sources, tests, manuals and textual test evidence are included. '
+              'Large screenshots from the local verification archive are not stored in this repository. '
+              'The original release manifest also lists those screenshots.\n\n'
+              'All imported file bytes were transported with SHA-1 object checks and a SHA-256 archive check. '
+              'GitHub Pages deployment requires Settings > Pages > Source: GitHub Actions.\n', encoding='utf-8')
+      - name: Run unit tests
+        run: npm test
+      - name: Commit imported release without overwriting remote work
+        id: release
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --all
+          if ! git diff --cached --quiet; then
+            git commit -m 'feat: publish VELORA GT 2.0 Touring release'
+            git push origin HEAD:main
+          fi
+          echo "commit=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.release.outputs.commit }}
+      - name: Prepare the static app
+        run: |
+          mkdir -p _site
+          cp index.html VELORA_GT.html sw.js manifest.webmanifest .nojekyll _site/
+          cp -R assets _site/assets
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Publish the app
+        id: deployment
+        uses: actions/deploy-pages@v4
